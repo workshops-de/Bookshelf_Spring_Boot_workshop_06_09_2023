@@ -2,10 +2,14 @@ package de.workshops.bookshelf;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -53,5 +57,14 @@ class BookRestControllerMvcTest {
         });
         assertThat(books).hasSize(3);
         assertThat(books.get(1).getTitle()).isEqualTo("Clean Code");
+    }
+
+    @TestConfiguration
+    static class MvcTestConfiguration {
+
+        @Bean
+        public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
+            return builder -> builder.featuresToEnable(SerializationFeature.INDENT_OUTPUT);
+        }
     }
 }

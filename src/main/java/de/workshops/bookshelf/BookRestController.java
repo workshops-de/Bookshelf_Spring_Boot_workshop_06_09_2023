@@ -23,8 +23,11 @@ public class BookRestController {
 
     private final BookService service;
 
-    public BookRestController(BookService service) {
+    private final BookshelfProperties properties;
+
+    public BookRestController(BookService service, BookshelfProperties properties) {
         this.service = service;
+        this.properties = properties;
     }
 
     @GetMapping
@@ -52,6 +55,12 @@ public class BookRestController {
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<String> handleBookNotFoundException(BookNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found - " + e.getMessage());
+    }
+
+    @GetMapping("/{isbn}/lookup")
+    public String lookupIsbn(@PathVariable String isbn) {
+        return String.format("%s does lookup for %s at %s",
+                properties.getOwner(), isbn, properties.getIsbnLookup().getServerUri());
     }
 
 /*
