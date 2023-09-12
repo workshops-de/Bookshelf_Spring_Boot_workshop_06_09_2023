@@ -14,23 +14,21 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {
-        return repository.getAllBooks();
+        return repository.findAll();
     }
 
     public Book findBookByIsbn(String isbn) {
-        return repository.getAllBooks().stream()
-                .filter(book -> hasIsbn(book, isbn))
-                .findFirst().orElseThrow(() -> new BookNotFoundException("ISBN: " + isbn));
+        return repository.findBookByIsbn(isbn)
+                .orElseThrow(() -> new BookNotFoundException("ISBN: " + isbn));
     }
 
     public Book findBookByAuthor(String author) {
-        return repository.getAllBooks().stream()
-                .filter(book -> hasAuthor(book, author))
-                .findFirst().orElseThrow();
+        return repository.findByAuthor(author)
+                .orElseThrow();
     }
 
     public List<Book> findBookByAuthorAndIsbn(String author, String isbn) {
-        return repository.getAllBooks().stream()
+        return repository.findAll().stream()
                 .filter(book -> author == null || hasAuthor(book, author))
                 .filter(book -> isbn == null || hasIsbn(book, isbn))
                 .toList();
