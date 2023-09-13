@@ -1,4 +1,4 @@
-package de.workshops.bookshelf;
+package de.workshops.bookshelf.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;

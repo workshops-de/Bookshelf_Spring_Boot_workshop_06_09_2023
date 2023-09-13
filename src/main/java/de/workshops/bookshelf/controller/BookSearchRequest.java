@@ -1,4 +1,4 @@
-package de.workshops.bookshelf;
+package de.workshops.bookshelf.controller;
 
 import lombok.Data;
 

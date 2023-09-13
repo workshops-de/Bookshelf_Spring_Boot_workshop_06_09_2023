@@ -1,5 +1,9 @@
-package de.workshops.bookshelf;
+package de.workshops.bookshelf.controller;
 
+import de.workshops.bookshelf.domain.Book;
+import de.workshops.bookshelf.domain.BookNotFoundException;
+import de.workshops.bookshelf.config.BookshelfProperties;
+import de.workshops.bookshelf.service.BookService;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.HttpStatus;

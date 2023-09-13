@@ -1,4 +1,4 @@
-package de.workshops.bookshelf;
+package de.workshops.bookshelf.config;
 
 import lombok.Getter;
 import lombok.Setter;
